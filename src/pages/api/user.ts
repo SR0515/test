@@ -20,12 +20,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //회원가입
     if(req.method ==='POST'){ //POST 요청하면
         try{
-            const {username, password, } = req.body //username,password의 값을 body에 데이터 받음 ---- 주로 POST 에서 사용
+            const {username, password, email } = req.body //username,password의 값을 body에 데이터 받음 ---- 주로 POST 에서 사용
             console.log(username, password)
             const data = await client.user.create({ //data{키-값}를 mysql의 user에 생성 
                 data: {
                     username: username, 
-                    password: password                 
+                    password: password,
+                    email: email
                 }
             })
             res.json(data) //직렬화

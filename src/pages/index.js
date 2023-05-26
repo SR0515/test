@@ -27,10 +27,10 @@ export default function Index(){
       <h1>데이터베이스</h1>
       {userList &&
         userList.map((user, idx) => {
-          const { id, username, password, created_at, updated_at } = user;
+          const { id, username, password, email, created_at, updated_at } = user;
           return (
             <p key={idx}>
-              id : {id}, username : {username}, password : {password},
+              id : {id}, username : {username}, password : {password}, email:{email}
               created_at :
               {moment(created_at)
                 .tz("Asia/Seoul")
@@ -55,8 +55,8 @@ export default function Index(){
           const email = e.target.email.value; //input의 name이 email인 것의 값 불러옴
           const data = { username: username, password: password , email: email}; // {username (키): username(변수-username)}
           console.log(data);
-          // await axios.post('/api/user', data)   //api에 data를 post 요청 ---- axios:API를 이용한 HTTP 비동기 통신 라이브러리 /post:create 생성 /'/api/user':데이터 연동 url / data:데이터
-          // router.reload()  //화면 새로고침 메서드 ---- router:라우팅(네트워크상의 주소로 이동하여 해당 주소에 연결되어있는 데이터를 사용하는 일련의 과정을 의미)을 수행하는 장치
+          await axios.post('/api/user', data)   //api에 data를 post 요청 ---- axios:API를 이용한 HTTP 비동기 통신 라이브러리 /post:create 생성 /'/api/user':데이터 연동 파일 / data:데이터
+          router.reload()  //화면 새로고침 메서드 ---- router:라우팅(네트워크상의 주소로 이동하여 해당 주소에 연결되어있는 데이터를 사용하는 일련의 과정을 의미)을 수행하는 장치
         }}
       >
         <input name="username" placeholder="아이디" /> <br />
